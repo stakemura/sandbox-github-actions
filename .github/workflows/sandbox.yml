@@ -1,0 +1,30 @@
+name: sandbox
+
+on: [push]
+
+jobs:
+  job1:
+    name: job1-${{ matrix.os_short }}-${{ matrix.flag_name }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        flag: [0, 1]
+        include: 
+        - os: ubuntu-latest
+          os_short: "ubuntu"
+        - os: windows-latest
+          os_short: "windows"
+        - flag: 0
+          flag_name: "OFF"
+        - flag: 1
+          flag_name: "ON"
+    steps:
+    - name: step1
+      shell: bash
+      run: echo "job1-${{ matrix.os_short }}-${{ flag_name }}"
+  job2:
+    name: job2
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "job2"
