@@ -22,7 +22,7 @@ jobs:
     steps:
     - name: step1
       shell: bash
-      run: echo "job1-${{ matrix.os_short }}-${{ flag_name }}"
+      run: echo "job1-${{ matrix.os_short }}-${{ matrix.flag_name }}"
   job2:
     name: job2
     runs-on: ubuntu-latest
