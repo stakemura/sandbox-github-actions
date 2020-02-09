@@ -7,6 +7,7 @@ jobs:
     name: job1-${{ matrix.os_short }}-${{ matrix.flag_name }}
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
         flag: [0, 1]
@@ -22,7 +23,10 @@ jobs:
     steps:
     - name: step1
       shell: bash
-      run: echo "job1-${{ matrix.os_short }}-${{ matrix.flag_name }}"
+      run: |
+        PARAM1=""
+        case ${{ matrix.os }} in windows-latest) PARAM1="win" ;; esac;
+        echo "job1-${{ matrix.os_short }}-${{ matrix.flag_name }} ${PARAM1}"
   job2:
     name: job2
     runs-on: ubuntu-latest
